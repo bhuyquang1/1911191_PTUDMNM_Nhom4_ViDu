@@ -86,13 +86,17 @@ and open the template in the editor.
                 <?php
                     $a = filter_input(INPUT_POST, 'a');
                     $b = filter_input(INPUT_POST, 'b');
-                    $evenOdd = "";
+                    $x = filter_input(INPUT_POST, 'results');
                     if (isset($_POST["validate"])) {
-                        if (is_numeric($number)) {
-                            if ($number % 2 == 0) {
-                                $evenOdd = "Số chẵn";
+                        if (is_numeric($a) && is_numeric($b)) {
+                            if ($a == 0) {
+                                if ($b == 0) {
+                                    $x = "Phương trình có vô sô nghiệm.";
+                                } else {
+                                    $x = "Phương trình vô nghiệm.";
+                                }
                             } else {
-                                $evenOdd = "Số lẻ";
+                                $x = -$b/$a;
                             }
                         }
                         else {
@@ -100,9 +104,9 @@ and open the template in the editor.
                         }
                     }
                 ?>
-                <p>a: <input type="text" name="a" value="<?php echo $number?>"></p>
-                <p>b: <input type="text" name="b" value="<?php echo $evenOdd?>"></p>
-                <input type="text"
+                <p>a: <input type="text" name="a" value="<?php echo $a?>"></p>
+                <p>b: <input type="text" name="b" value="<?php echo $b?>"></p>
+                <p>x: <input type="text" name="results" value="<?php echo $x?>" placeholder="Kết quả"></p>
                 <input name="validate" type="submit" value="Kiểm tra">
             </form>
         </div>
